@@ -4,22 +4,34 @@
     ViewData["Title"] = "Registro de usuario";
 }
 
-<h1>Registro de usuario</h1>
-<form method="post" class="form-floating">
-    <div class="form-group">
-        <label asp-for="Name"></label>
-        <input class="form-control" asp-for=Name />
+<div class="modal modal-sheet position-static d-block bg-body-secondary p-4 py-md-5" tabindex="-1" role="dialog" id="modalSignin">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content rounded-4 shadow">
+            <div class="modal-header p-5 pb-4 border-bottom-0">
+                <h1 class="fw-bold mb-0 fs-2">Nuevo usuario</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body p-5 pt-0">
+                <form method="post" class="form-floating">
+                    <div class="form-floating mb-3">
+                        <input asp-for="Name" class="form-control rounded-3" id="floatingInput" placeholder="Nombre">
+                        <label for="floatingInput" asp-for="Name"></label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Age" class="form-control rounded-3" id="floatingInput" placeholder="Edad">
+                        <label for="floatingInput" asp-for="Age"></label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input asp-for="Mail" class="form-control rounded-3" id="floatingInput" placeholder="name@example.com">
+                        <label for="floatingInput" asp-for="Mail"></label>
+                    </div>
+                    <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Registrar</button>
+                    <div>
+                        <small><a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">¿Ya eres usuario? Inicia sesión</a></small>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    <div class="form-group">
-        <label asp-for="Age"></label>
-        <input class="form-control" asp-for=Age />
-    </div>
-    <div class="form-group">
-        <label asp-for="Mail"></label>
-        <input class="form-control" asp-for=Mail />
-    </div>
-    <br/>
-    <div class="text-center panel-body">
-        <button type="submit" class="btn btn-sm btn-primary">Registrar</button>
-    </div>
-</form>
+</div>
