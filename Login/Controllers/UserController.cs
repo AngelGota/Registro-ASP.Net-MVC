@@ -11,7 +11,7 @@ namespace Login.Controllers
         {
             using (SqlConnection con = new(Configuration["ConnectionStrings:cadCon"]))
             {
-                using (SqlCommand cmd = new("sp_rea_user", con))
+                using (SqlCommand cmd = new("sp_read_users", con))
                 {
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     con.Open();
@@ -28,7 +28,8 @@ namespace Login.Controllers
                             IdUser = Convert.ToInt32(dt.Rows[i][0]),
                             Name = (dt.Rows[i][1]).ToString(),
                             Age = Convert.ToInt32(dt.Rows[i][2]),
-                            Mail = (dt.Rows[i][3]).ToString()
+                            Mail = (dt.Rows[i][3]).ToString(),
+                            Password = (dt.Rows[i][4]).ToString()
                         });
                     }
                     ViewBag.User = list;
@@ -54,12 +55,13 @@ namespace Login.Controllers
         {
             using (SqlConnection con = new(Configuration["ConnectionStrings:cadCon"]))
             {
-                using (SqlCommand cmd = new("sp_reg_user", con))
+                using (SqlCommand cmd = new("sp_register_users", con))
                 {
                     cmd.CommandType = System.Data.CommandType.StoredProcedure;
                     cmd.Parameters.Add("@namUser", System.Data.SqlDbType.VarChar).Value=usuario.Name;
                     cmd.Parameters.Add("@ageUser", System.Data.SqlDbType.Int).Value = usuario.Age;
                     cmd.Parameters.Add("@mailUser", System.Data.SqlDbType.VarChar).Value = usuario.Mail;
+                    cmd.Parameters.Add("@passUser", System.Data.SqlDbType.VarChar).Value = usuario.Password;
                     con.Open();
                     cmd.ExecuteNonQuery();
                     con.Close();
